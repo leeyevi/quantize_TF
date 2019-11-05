@@ -1,28 +1,22 @@
 # quantize_TF
+量化训练及部署转tflite
 
 #1. 量化训练。加在定义好loss之后，优化器之前
 g = tf.get_default_graph()
-tf.contrib.quantize.create_training_graph(input_graph=g, quant_delay=0)
+tf.contrib.quantize.create_training_graph(input_graph=g, quant_delay=0)#首先需要重头训练，后面可以使用预训练
 
 #2. 完成量化训练后，读取量化图并保存
 x=tf.placeholder(tf.float32,shape=[None,128,128,3],name='x')
 y_=tf.placeholder(tf.int32,shape=[None,11],name='y_')
 is_training=tf.placeholder(tf.bool,name='is_train')
-#is_training = True
-global_step = tf.placeholder(dtype=tf.float32, shape=())
-lr_decay_step =364308 // batch_size * 2 # every epoch
-lr = tf.train.exponential_decay(lr, global_step=global_step, decay_steps=lr_decay_step, decay_rate=0.7)
 logits=nasnet(x,num_classes=11,is_train=is_training)
-
 l2_loss = tf.add_n(tf.get_collection(tf.GraphKeys.REGULARIZATION_LOSSES))
 #loss=focal_loss(logits,y_)+l2_loss
 loss=tf.losses.softmax_cross_entropy(onehot_labels=y_,logits=logits)+l2_loss
 #loss=tf.losses.sparse_softmax_cross_entropy(labels=y_,logits=logits)+l2_loss
 g = tf.get_default_graph()
-
 tf.contrib.quantize.create_eval_graph(input_graph=g)
 eval_graph_file ='./models/quan/eval_graph_def.pb'
-
 saver=tf.train.Saver()
 with tf.Session() as sess:
     #sess.run(tf.global_variables_initializer())
@@ -63,7 +57,7 @@ def frozen2tflite():
     converter.allow_custom_ops = True
     #converter.std_dev = 127
     #converter.mean = 127
-    #converter.quantized_input_stats = {'x':(0.,1.)}
+    #converter.quantized_input_stats = {'x':(0.,1.)}#
     #converter.allow_custom_ops = True
     converter.default_ranges_stats = (0, 255)#这里需要研究一下
     #onverter.post_training_quantize = True
