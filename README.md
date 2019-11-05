@@ -33,7 +33,7 @@ with tf.Session() as sess:
     saver.restore(sess,'./models/quan/model.ckpt')
     saver.save(sess, './models/quan/eval.ckpt')
 
-#冻结量化图.ckpt
+#3. 冻结量化图.ckpt
 def frozen():
 
     #tf.reset_default_graph()
@@ -54,7 +54,7 @@ def frozen():
         freeze_graph.freeze_graph('./models/quan/model.pb', '', False, model_path, 'nas_tcl/logits/logits/Conv2D','save/restore_all', 'save/Const:0', './models/quan/frozen_model.pb', False, "")
 
     print("done")
-# pb转tflite
+#4. pb转tflite
 def frozen2tflite():
 
     path_to_frozen_graphdef_pb = './models/quan/frozen_model.pb'
@@ -70,7 +70,7 @@ def frozen2tflite():
     #converter.mean = 127
     #converter.quantized_input_stats = {'x':(0.,1.)}
     #converter.allow_custom_ops = True
-    converter.default_ranges_stats = (0, 255)
+    converter.default_ranges_stats = (0, 255)#这里需要研究一下
     #onverter.post_training_quantize = True
     tflite_model = converter.convert()
     open("./models/quan/nas_scene_q.tflite", "wb").write(tflite_model)
