@@ -65,12 +65,12 @@ def frozen2tflite():
     open("./models/quan/nas_scene_q.tflite", "wb").write(tflite_model)
     
 【参考】
-.pb可视化 https://lutzroeder.github.io/netron/
-https://tensorflow.google.cn/lite/guide
-https://blog.csdn.net/lishanlu136/article/details/88872266
-https://github.com/tensorflow/tensorflow/tree/master/tensorflow/examples/speech_commands
-https://stackoverflow.com/questions/54261772/tensorflow-lite-toco-mean-values-std-values
-https://www.tensorflowers.cn/t/7136/4
-https://github.com/tensorflow/tensorflow/tree/r1.13/tensorflow/contrib/quantize
+1 .pb可视化 https://lutzroeder.github.io/netron/
+2 https://tensorflow.google.cn/lite/guide
+3 https://blog.csdn.net/lishanlu136/article/details/88872266
+4 https://github.com/tensorflow/tensorflow/tree/master/tensorflow/examples/speech_commands
+5 https://stackoverflow.com/questions/54261772/tensorflow-lite-toco-mean-values-std-values
+6 https://www.tensorflowers.cn/t/7136/4
+7 https://github.com/tensorflow/tensorflow/tree/r1.13/tensorflow/contrib/quantize
 
 
