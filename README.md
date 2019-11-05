@@ -63,3 +63,14 @@ def frozen2tflite():
     #onverter.post_training_quantize = True
     tflite_model = converter.convert()
     open("./models/quan/nas_scene_q.tflite", "wb").write(tflite_model)
+    
+【参考】
+.pb可视化 https://lutzroeder.github.io/netron/
+https://tensorflow.google.cn/lite/guide
+https://blog.csdn.net/lishanlu136/article/details/88872266
+https://github.com/tensorflow/tensorflow/tree/master/tensorflow/examples/speech_commands
+https://stackoverflow.com/questions/54261772/tensorflow-lite-toco-mean-values-std-values
+https://www.tensorflowers.cn/t/7136/4
+https://github.com/tensorflow/tensorflow/tree/r1.13/tensorflow/contrib/quantize
+
+
