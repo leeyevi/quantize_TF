@@ -34,7 +34,6 @@ with tf.Session() as sess:
     saver.save(sess, './models/quan/eval.ckpt')
 
 #3. 冻结量化图.ckpt
-
 def frozen():    
     input_node = tf.placeholder(tf.float32, shape=(1, 128, 128, 3), name="input") #这个是你送入网络的图片大小，如果你是其他的大小自行修改
     #input_node = tf.expand_dims(input_node, 0)
@@ -43,9 +42,7 @@ def frozen():
     #tf.contrib.quantize.create_eval_graph(input_graph=tf.get_default_graph())
     saver = tf.train.Saver()
     with tf.Session() as sess:
-
         saver.restore(sess, model_path)
-
         #保存图
         tf.train.write_graph(sess.graph_def, './models/quan/', 'model.pb')
         #把图和参数结构一起
@@ -54,8 +51,6 @@ def frozen():
     print("done")
     
 #4. pb转tflite
-
-
 def frozen2tflite():
     path_to_frozen_graphdef_pb = './models/quan/frozen_model.pb'
     #input_shapes = {'validate_input/imgs':[1,320,320,3]}
