@@ -34,10 +34,8 @@ with tf.Session() as sess:
     saver.save(sess, './models/quan/eval.ckpt')
 
 #3. 冻结量化图.ckpt
-def frozen():
 
-    #tf.reset_default_graph()
-
+def frozen():    
     input_node = tf.placeholder(tf.float32, shape=(1, 128, 128, 3), name="input") #这个是你送入网络的图片大小，如果你是其他的大小自行修改
     #input_node = tf.expand_dims(input_node, 0)
     flow = nasnet(input_node, 11)
@@ -54,9 +52,11 @@ def frozen():
         freeze_graph.freeze_graph('./models/quan/model.pb', '', False, model_path, 'nas_tcl/logits/logits/Conv2D','save/restore_all', 'save/Const:0', './models/quan/frozen_model.pb', False, "")
 
     print("done")
+    
 #4. pb转tflite
-def frozen2tflite():
 
+
+def frozen2tflite():
     path_to_frozen_graphdef_pb = './models/quan/frozen_model.pb'
     #input_shapes = {'validate_input/imgs':[1,320,320,3]}
     #converter = tf.compat.v1.lite.TFLiteConverter.
