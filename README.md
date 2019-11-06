@@ -72,5 +72,7 @@ def frozen2tflite():
 5 https://stackoverflow.com/questions/54261772/tensorflow-lite-toco-mean-values-std-values
 6 https://www.tensorflowers.cn/t/7136/4
 7 https://github.com/tensorflow/tensorflow/tree/r1.13/tensorflow/contrib/quantize
+8 https://blog.csdn.net/angela_12/article/details/85000072
+9 https://blog.csdn.net/qq_16564093/article/details/78996563
 
 
